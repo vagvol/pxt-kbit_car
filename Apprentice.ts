@@ -147,7 +147,7 @@ namespace K_Bit {
 
     /////////////////////////////////////////////////////
     /**
-     * car run diretion
+     * car run direction
      */
     //% block="car $direction speed: $speed \\%"
     //% speed.min=0 speed.max=100
@@ -331,11 +331,12 @@ namespace K_Bit {
     }
 
     /////////////////////////////////////////////////////
+    
+    pins.setPull(DigitalPin.P2, PinPullMode.PullNone);
+    pins.setPull(DigitalPin.P11, PinPullMode.PullNone);
     /**
      * infrared obstacle sensor
      */
-    pins.setPull(DigitalPin.P2, PinPullMode.PullNone);
-    pins.setPull(DigitalPin.P11, PinPullMode.PullNone);
     //% block="$LR obstacle sensor "
     //% group="Sensor" weight=69
     export function obstacle(LR: MotorObs): number {
@@ -348,6 +349,25 @@ namespace K_Bit {
         }
         return val;
     }
+
+    ////////////////////////////////////////////
+
+    /**
+     * infrared line sensor
+     */
+    //% block="$LR line sensor "
+    //% group="Sensor" weight=69
+    export function line_sensor(LR: MotorObs): number {
+        let val;
+        if (LR == 0) {  //left side
+            val = pins.digitalReadPin(DigitalPin.P12);
+        }
+        if (LR == 1) {  //right side
+            val = pins.digitalReadPin(DigitalPin.P13);
+        }
+        return val;
+    }
+
     /**
      * return 0b01 or 0b10
      * 0b01 is the sensor on the left
@@ -355,6 +375,9 @@ namespace K_Bit {
      */
     pins.setPull(DigitalPin.P12, PinPullMode.PullNone);
     pins.setPull(DigitalPin.P13, PinPullMode.PullNone);
+    /**
+     * Line following direction block
+     */
     //% block="Line Tracking"
     //% group="Sensor" weight=68
     export function LineTracking(): number {
@@ -368,6 +391,9 @@ namespace K_Bit {
     const ECHO_PIN = DigitalPin.P15;
     pins.setPull(TRIG_PIN, PinPullMode.PullNone);
     let lastTime = 0;
+    /**
+     * Ultrasonic Sensor to measure distance
+     */
     //% block="Ultrasonic"
     //% group="Sensor" weight=67
     export function ultra(): number {
@@ -403,19 +429,6 @@ namespace K_Bit {
     }
 }
 
-// Infrared Wireless Module Kit for microbit
-// (receiver module+remote controller)
-// author: jieliang mo
-// github:https://github.com/mworkfun
-// Write the date: 2020-6-19
-
-
-/**
- * create IR_receiver namespace
- * use for IR receiver and IR emission kit
- * author: jieliang mo
- * Write the date: 2020-6-19
- */
 //% color="#ff6800" weight=10 icon="\uf1eb"
 namespace irRemote {
     /**
