@@ -75,7 +75,7 @@ enum MotorDir {
 }
 //% color="#ff6800" icon="\uf1b9" weight=15
 //% groups="['Motor', 'RGB-led', 'Neo-pixel', 'Sensor', 'Tone']"
-namespace Apprentice {
+namespace K_Bit {
     /**
      * use for control PCA9685
      */
