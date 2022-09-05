@@ -495,9 +495,6 @@ namespace irRemote {
     }
     /**
     * Convert the pulse into data function
-    * author: jieliang mo
-    * github:https://github.com/mworkfun
-    * Write the date: 2020-6-19
     */
     function irDataProcessing() {
         let tempAddress: number = 0;
@@ -543,9 +540,6 @@ namespace irRemote {
     }
     /**
      * Connects to the IR receiver module at the specified pin.
-     * author: jieliang mo
-     * github:https://github.com/mworkfun
-     * Write the date: 2020-6-19
      */
     //% blockId="infrared_connect"
     //% block="connect IR receiver at %IR_pin"
@@ -560,9 +554,6 @@ namespace irRemote {
     }
     /**
      * Returns the command code of a specific IR button.
-     * author: jieliang mo
-     * github:https://github.com/mworkfun
-     * Write the date: 2020-6-19
      */
     //% blockId=infrared_button
     //% button.fieldEditor="gridpicker"
@@ -576,9 +567,6 @@ namespace irRemote {
     /**
      * Returns the code of the IR button that is currently pressed and 0 if no button is pressed.
      * It is recommended to delay 110ms to read the data once
-     * author: jieliang mo
-     * github:https://github.com/mworkfun
-     * Write the date: 2020-6-19
      */
     //% blockId=infrared_pressed_button
     //% block="IR button"
