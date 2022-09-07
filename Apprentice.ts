@@ -174,13 +174,13 @@ namespace K_Bit {
                 setPwm(1, 0, speed_value);  //control speed : 0---4095
                 setPwm(0, 0, 4095);
                 setPwm(3, 0, speed_value);  //control speed : 0---4095
-                setPwm(2, 0, 500);
+                setPwm(2, 0, 0);
                 break;
             case 3:  //turn right
                 setPwm(1, 0, speed_value);  //control speed : 0---4095
                 setPwm(0, 0, 500);
                 setPwm(3, 0, speed_value);  //control speed : 0---4095
-                setPwm(2, 0, 4095);
+                setPwm(2, 0, 0);
                 break;
             default: break;
         }
@@ -269,7 +269,9 @@ namespace K_Bit {
         if (!PCA9685_Initialized) {
             init_PCA9685();
         }
-
+        if (L_brightness <= 0) {
+            L_brightness = Math.map(125, 0, 255, 4095, 0);
+        }
         if (col == COLOR.red) {
             setPwm(5, 0, 4095);
             setPwm(6, 0, L_brightness);
