@@ -1,5 +1,5 @@
 /**
- * use for RGB-LED
+ * used for RGB-LED
  */
 enum COLOR {
     red,
@@ -9,7 +9,7 @@ enum COLOR {
     black
 }
 /**
- * use for control motor
+ * used for control motor
  */
 enum DIR {
     RunForward = 0,
@@ -17,7 +17,9 @@ enum DIR {
     TurnLeft = 2,
     TurnRight = 3
 }
-
+/**
+ * used for IR remote
+ */
 const enum IrButton {
     //% block=" "
     Any = -1,
@@ -63,7 +65,7 @@ const enum IrButton {
     Hash = 74
 }
 /**
- * use for motor and infrared obstacle sensor
+ * used for motor and infrared obstacle sensor
  */
 enum MotorObs {
     LeftSide = 0,
@@ -77,7 +79,7 @@ enum MotorDir {
 //% groups="['Motor', 'RGB-led', 'Neo-pixel', 'Sensor', 'Tone']"
 namespace K_Bit {
     /**
-     * use for control PCA9685
+     * used to control PCA9685
      */
     const PCA9685_ADDRESS = 0x43;   //device address
     const MODE1 = 0x00;
@@ -147,7 +149,7 @@ namespace K_Bit {
 
     /////////////////////////////////////////////////////
     /**
-     * car run direction
+     * move the car in a desired direction
      */
     //% block="car $direction speed: $speed \\%"
     //% speed.min=0 speed.max=100
@@ -186,7 +188,7 @@ namespace K_Bit {
         }
     }
     /**
-     * set cat state
+     * stop the car from moving
      */
     //% block="car stop"
     //% group="Motor" weight=98
@@ -198,7 +200,7 @@ namespace K_Bit {
         setPwm(3, 0, 0);  //control speed : 0---4095
     }
     /**
-     * set speed of motor
+     * set speed of motors on the car
      */
     //% block="$M motor run $MD speed: $speed \\%"
     //% speed.min=0 speed.max=100
@@ -228,7 +230,7 @@ namespace K_Bit {
 
     }
     /**
-     * set motor state
+     * control individual motors
      */
     //% block="$M motor stop"
     //% group="Motor" weight=96
@@ -352,7 +354,7 @@ namespace K_Bit {
     ////////////////////////////////////////////
 
     /**
-     * infrared line sensor
+     * individual infared line sensors
      */
     //% block="$LR line sensor "
     //% group="Sensor" weight=69
@@ -420,7 +422,7 @@ namespace K_Bit {
         return Math.round(ret / 40);
     }
     /**
-     * photoresistance sensor
+     * photoresistance sensor to measure light
      */
     //% block="photoresistor "
     //% group="Sensor" weight=66
