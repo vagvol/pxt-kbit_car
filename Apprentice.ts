@@ -359,13 +359,14 @@ namespace K_Bit {
     //% group="Sensor" weight=69
     export function line_sensor(LR: MotorObs): number {
         let val;
-        if (LR == 0) {  //left side
+        if (LR == 1) {  //left side
             val = pins.digitalReadPin(DigitalPin.P12);
         }
-        if (LR == 1) {  //right side
+        if (LR == 0) {  //right side
             val = pins.digitalReadPin(DigitalPin.P13);
         }
         return val;
+        
     }
 
     /**
