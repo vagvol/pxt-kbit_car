@@ -360,10 +360,10 @@ namespace K_Bit {
     export function line_sensor(LR: MotorObs): number {
         let val;
         if (LR == 0) {  //left side
-            val = pins.digitalReadPin(DigitalPin.P12);
+            val = pins.digitalReadPin(DigitalPin.P13);
         }
         if (LR == 1) {  //right side
-            val = pins.digitalReadPin(DigitalPin.P13);
+            val = pins.digitalReadPin(DigitalPin.P12);
         }
         return val;
     }
