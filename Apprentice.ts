@@ -266,11 +266,9 @@ namespace K_Bit {
     //% block="set RGBled $col"
     //% group="RGB-led" weight=78
     export function Led(col: COLOR) {
+        LED_brightness(L_brightness);
         if (!PCA9685_Initialized) {
             init_PCA9685();
-        }
-        if (L_brightness <= 0) {
-            L_brightness = Math.map(125, 0, 255, 4095, 0);
         }
         if (col == COLOR.red) {
             setPwm(5, 0, 4095);
