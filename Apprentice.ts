@@ -154,6 +154,7 @@ namespace K_Bit {
     //% block="car $direction speed: $speed \\%"
     //% speed.min=0 speed.max=100
     //% group="Motor" weight=99
+
     export function run(direction: DIR, speed: number) {
         if (!PCA9685_Initialized) {
             init_PCA9685();
@@ -577,5 +578,14 @@ namespace irRemote {
         irDataProcessing();
         basic.pause(80);      //Delay by one infrared receiving period
         return IR_R.command;
+    }
+
+    /**
+    * stop the car from moving
+    */
+    //% block="competiton"
+    //% group="Motor" weight=98
+    export function competiton() {
+       
     }
 }
