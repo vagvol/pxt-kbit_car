@@ -79,9 +79,14 @@ enum MotorDir {
 //% groups="['Motor', 'RGB-led', 'Neo-pixel', 'Sensor', 'Tone']"
 namespace K_Bit {
     /**
+    * constants for the mars challenge
+    */
+    let speed = 100;
+    let violations= 0;
+    /**
      * used to control PCA9685
      */
-    const PCA9685_ADDRESS = 0x43;   //device address
+    const PCA9685_ADDRESS = 0x43;   //device address; controlls motors
     const MODE1 = 0x00;
     const MODE2 = 0x01;
     const SUBADR1 = 0x02;
@@ -206,7 +211,7 @@ namespace K_Bit {
     //% block="$M motor run $MD speed: $speed \\%"
     //% speed.min=0 speed.max=100
     //% group="Motor" weight=97
-    export function Motor(M: MotorObs, MD: MotorDir, speed: number) {
+    export function Motor(M: MotorObs, MD: MotorDir) {
         if (!PCA9685_Initialized) {
             init_PCA9685();
         }
@@ -429,6 +434,13 @@ namespace K_Bit {
     //% group="Sensor" weight=66
     export function PH(): number {
         return pins.analogReadPin(AnalogPin.P1);
+    }
+
+    function windHit(): void {
+        input.onSound(DetectedSound.Loud, function () {
+            speed +- 2;
+
+        })
     }
 }
 
