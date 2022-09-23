@@ -10,7 +10,9 @@
     },
     "files": [
         "README.md",
-        "Apprentice.ts"
+        "Apprentice.ts",
+        "main.py",
+        "main.ts"
     ],
     "testFiles": [
         "test.ts"
