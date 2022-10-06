@@ -59,3 +59,6 @@ MIT
 
 * for PXT/microbit
 
+## Further resources
+More info can be found [here](https://resolute.education/curriculum/5/overview/)
+
