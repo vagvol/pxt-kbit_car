@@ -436,12 +436,6 @@ namespace K_Bit {
         return pins.analogReadPin(AnalogPin.P1);
     }
 
-    function windHit(): void {
-        input.onSound(DetectedSound.Loud, function () {
-            speed +- 2;
-
-        })
-    }
 }
 
 //% color="#ff6800" weight=10 icon="\uf1eb"
@@ -590,14 +584,5 @@ namespace irRemote {
         irDataProcessing();
         basic.pause(80);      //Delay by one infrared receiving period
         return IR_R.command;
-    }
-
-    /**
-    * stop the car from moving
-    */
-    //% block="competiton"
-    //% group="Motor" weight=98
-    export function competiton() {
-       
     }
 }
