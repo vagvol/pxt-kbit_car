@@ -1,31 +1,61 @@
 
-> Open this page at [https://resolute-support.github.io/apprentice_car/](https://resolute-support.github.io/apprentice_car/)
+# Apprentice Car blocks for micro:bit
 
-## Use as Extension
+The product page for the Apprentice Car can be found at [https://resoluteshop.co.za/product/apprentice-car/](https://resoluteshop.co.za/product/apprentice-car/)
 
-This repository can be added as an **extension** in MakeCode.
+# Blocks usage:
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **New Project**
-* click on **Extensions** under the gearwheel menu
-* search for **https://github.com/resolute-support/apprentice_car** and import
+* Movement
+```blocks
+K_Bit.run(DIR.RunForward, 0)
+basic.pause(500)
+K_Bit.carStop()
+basic.pause(500)
+K_Bit.Motor(MotorObs.LeftSide, MotorDir.Forward)
+basic.pause(500)
+K_Bit.MotorSta(MotorObs.LeftSide)
+```
 
-## Edit this project ![Build status badge](https://github.com/resolute-support/apprentice_car/workflows/MakeCode/badge.svg)
+* IR
+```blocks
+irRemote.connectInfrared(DigitalPin.P0)
+basic.forever(function () {
+    if (irRemote.returnIrButton() == irRemote.irButton(IrButton.Ok)) {
+        basic.showString("OK")
+        basic.pause(100)
+        basic.clearScreen()
+    }
+})
+```
 
-To edit this repository in MakeCode.
+* Neopixel ring
+```blocks
+let strip = neopixel.create(DigitalPin.P5, 18, NeoPixelMode.RGB)
+basic.forever(function () {
+    strip.showColor(neopixel.colors(NeoPixelColors.Yellow))
+})
+```
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **Import** then click on **Import URL**
-* paste **https://github.com/resolute-support/apprentice_car** and click import
+* Ultrasonic sensor
+```blocks
+if (K_Bit.ultra() > 5) {
+        basic.showIcon(IconNames.Angry)
+    } else {
+        basic.showIcon(IconNames.Happy)
+}
+```
 
-## Blocks preview
+* LED blocks (The brightness block is required)
+```blocks
+K_Bit.LED_brightness(0)
+K_Bit.Led(COLOR.red)
+```
 
-This image shows the blocks code from the last commit in master.
-This image may take a few minutes to refresh.
+## License
 
-![A rendered view of the blocks](https://github.com/resolute-support/apprentice_car/raw/master/.github/makecode/blocks.png)
+MIT
 
-#### Metadata (used for search, rendering)
+## Supported targets
 
 * for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+
