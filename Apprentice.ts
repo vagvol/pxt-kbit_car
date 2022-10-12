@@ -78,11 +78,7 @@ enum MotorDir {
 //% color="#ff6800" icon="\uf1b9" weight=15
 //% groups="['Motor', 'RGB-led', 'Neo-pixel', 'Sensor', 'Tone']"
 namespace K_Bit {
-    /**
-    * constants for the mars challenge
-    */
-    let speed = 100;
-    let violations= 0;
+
     /**
      * used to control PCA9685
      */
@@ -211,7 +207,7 @@ namespace K_Bit {
     //% block="$M motor run $MD speed: $speed \\%"
     //% speed.min=0 speed.max=100
     //% group="Motor" weight=97
-    export function Motor(M: MotorObs, MD: MotorDir) {
+    export function Motor(M: MotorObs, MD: MotorDir, speed: number) {
         if (!PCA9685_Initialized) {
             init_PCA9685();
         }

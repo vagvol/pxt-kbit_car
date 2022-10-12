@@ -1,7 +1,7 @@
 {
     "name": "apprentice-car",
     "version": "1.0.0",
-    "description": "",
+    "description": "Makecode Extension for the Apprentice Car made by Resolute",
     "dependencies": {
         "core": "*",
         "radio": "*",
