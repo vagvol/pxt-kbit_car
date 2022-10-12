@@ -386,7 +386,7 @@ namespace K_Bit {
     /**
      * Line following direction block
      */
-    //% block="Line Tracking"
+    //% block="line Tracking"
     //% group="Sensor" weight=68
     export function LineTracking(): number {
         let val = pins.digitalReadPin(DigitalPin.P12) << 0 | pins.digitalReadPin(DigitalPin.P13) << 1;
@@ -402,7 +402,7 @@ namespace K_Bit {
     /**
      * Ultrasonic Sensor to measure distance
      */
-    //% block="Ultrasonic"
+    //% block="ultrasonic"
     //% group="Sensor" weight=67
     export function ultra(): number {
         //send trig pulse
