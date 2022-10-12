@@ -16,18 +16,18 @@ function Test_Neopixel() {
     strip.clear()
 }
 function Test_Movement() {
-    K_Bit.run(DIR.RunForward, 50)
+    kBit.run(DIR.RunForward, 50)
     basic.pause(100)
-    K_Bit.carStop()
-    K_Bit.run(DIR.RunBack, 50)
+    kBit.carStop()
+    kBit.run(DIR.RunBack, 50)
     basic.pause(100)
-    K_Bit.carStop()
+    kBit.carStop()
     basic.pause(100)
-    K_Bit.run(DIR.TurnLeft, 50)
+    kBit.run(DIR.TurnLeft, 50)
     basic.pause(100)
-    K_Bit.run(DIR.TurnRight, 50)
+    kBit.run(DIR.TurnRight, 50)
     basic.pause(100)
-    K_Bit.carStop()
+    kBit.carStop()
 }
 let strip: neopixel.Strip = null
 Test_Movement()
