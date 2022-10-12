@@ -2,11 +2,11 @@
  * used for RGB-LED
  */
 enum COLOR {
-    red,
-    green,
-    blue,
-    white,
-    black
+    Red,
+    Green,
+    Blue,
+    White,
+    Black
 }
 /**
  * used for control motor
@@ -20,7 +20,7 @@ enum DIR {
 /**
  * used for IR remote
  */
-const enum IrButton {
+const enum IRBUTTON {
     //% block=" "
     Any = -1,
     //% block="▲"
@@ -139,7 +139,7 @@ namespace K_Bit {
         pins.i2cWriteBuffer(PCA9685_ADDRESS, buf);
     }
 
-    function init_PCA9685(): void {
+    function initPCA9685(): void {
         i2cWrite(PCA9685_ADDRESS, MODE1, 0x00);  //initialize the mode register 1
         setFreq(50);   //20ms
         for (let idx = 0; idx < 16; idx++) {
@@ -158,7 +158,7 @@ namespace K_Bit {
 
     export function run(direction: DIR, speed: number) {
         if (!PCA9685_Initialized) {
-            init_PCA9685();
+            initPCA9685();
         }
         let speed_value = Math.map(speed, 0, 100, 0, 4095);
         switch (direction) {
@@ -196,7 +196,7 @@ namespace K_Bit {
     //% group="Motor" weight=98
     export function carStop() {
         if (!PCA9685_Initialized) {
-            init_PCA9685();
+            initPCA9685();
         }
         setPwm(1, 0, 0);  //control speed : 0---4095
         setPwm(3, 0, 0);  //control speed : 0---4095
@@ -207,9 +207,9 @@ namespace K_Bit {
     //% block="$M motor run $MD speed: $speed \\%"
     //% speed.min=0 speed.max=100
     //% group="Motor" weight=97
-    export function Motor(M: MotorObs, MD: MotorDir, speed: number) {
+    export function motor(M: MotorObs, MD: MotorDir, speed: number) {
         if (!PCA9685_Initialized) {
-            init_PCA9685();
+            initPCA9685();
         }
         let speed_value = Math.map(speed, 0, 100, 0, 4095);
         if (M == 0 && MD == 0) {
@@ -236,9 +236,9 @@ namespace K_Bit {
      */
     //% block="$M motor stop"
     //% group="Motor" weight=96
-    export function MotorSta(M: MotorObs) {
+    export function motorMove(M: MotorObs) {
         if (!PCA9685_Initialized) {
-            init_PCA9685();
+            initPCA9685();
         }
 
         if (M == 0) {         //left side motor
@@ -254,46 +254,46 @@ namespace K_Bit {
     /**
      * set rgb-led brightness
      */
-    let L_brightness = 4095;  //control the rgb-led brightness
+    let lBrightness = 4095;  //control the rgb-led brightness
     //% block="LED brightness $br"
     //% br.min=0 br.max=255
     //% group="RGB-led" weight=79
-    export function LED_brightness(br: number) {
+    export function ledBrightness(br: number) {
         if (!PCA9685_Initialized) {
-            init_PCA9685();
+            initPCA9685();
         }
-        L_brightness = Math.map(br, 0, 255, 4095, 0);
+        lBrightness = Math.map(br, 0, 255, 4095, 0);
     }
     /**
      * set the rgb-led color via the color card
      */
     //% block="set RGBled $col"
     //% group="RGB-led" weight=78
-    export function Led(col: COLOR) {
+    export function led(col: COLOR) {
         if (!PCA9685_Initialized) {
-            init_PCA9685();
+            initPCA9685();
         }
-        if (col == COLOR.red) {
+        if (col == COLOR.Red) {
             setPwm(5, 0, 4095);
-            setPwm(6, 0, L_brightness);
+            setPwm(6, 0, lBrightness);
             setPwm(4, 0, 4095);
         }
-        if (col == COLOR.green) {
-            setPwm(5, 0, L_brightness);
+        if (col == COLOR.Green) {
+            setPwm(5, 0, lBrightness);
             setPwm(6, 0, 4095);
             setPwm(4, 0, 4095);
         }
-        if (col == COLOR.blue) {
+        if (col == COLOR.Blue) {
             setPwm(5, 0, 4095);
             setPwm(6, 0, 4095);
-            setPwm(4, 0, L_brightness);
+            setPwm(4, 0, lBrightness);
         }
-        if (col == COLOR.white) {
-            setPwm(5, 0, L_brightness);
-            setPwm(6, 0, L_brightness);
-            setPwm(4, 0, L_brightness);
+        if (col == COLOR.White) {
+            setPwm(5, 0, lBrightness);
+            setPwm(6, 0, lBrightness);
+            setPwm(4, 0, lBrightness);
         }
-        if (col == COLOR.black) {
+        if (col == COLOR.Black) {
             setPwm(5, 0, 4095);
             setPwm(6, 0, 4095);
             setPwm(4, 0, 4095);
@@ -305,14 +305,14 @@ namespace K_Bit {
     //% block=" set RGBled R:$red G:$green B:$blue"
     //% red.min=0 red.max=255 green.min=0 green.max=255 blue.min=0 blue.max=255
     //% group="RGB-led" weight=77
-    export function SetLed(red: number, green: number, blue: number) {
+    export function setLed(red: number, green: number, blue: number) {
         if (!PCA9685_Initialized) {
-            init_PCA9685();
+            initPCA9685();
         }
 
-        let R = Math.map(red, 0, 255, 4095, L_brightness);
-        let G = Math.map(green, 0, 255, 4095, L_brightness);
-        let B = Math.map(blue, 0, 255, 4095, L_brightness);
+        let R = Math.map(red, 0, 255, 4095, lBrightness);
+        let G = Math.map(green, 0, 255, 4095, lBrightness);
+        let B = Math.map(blue, 0, 255, 4095, lBrightness);
 
         setPwm(6, 0, R);
         setPwm(5, 0, G);
@@ -323,9 +323,9 @@ namespace K_Bit {
      */
     //% block="turn off RGB-led"
     //% group="RGB-led" weight=76
-    export function OFFLed() {
+    export function offLed() {
         if (!PCA9685_Initialized) {
-            init_PCA9685();
+            initPCA9685();
         }
 
         setPwm(6, 0, 4095);
@@ -360,7 +360,7 @@ namespace K_Bit {
      */
     //% block="$LR line sensor "
     //% group="Sensor" weight=69
-    export function line_sensor(LR: MotorObs): number {
+    export function lineSensor(LR: MotorObs): number {
         let val;
         if (LR == 1) {  //left side
             val = pins.digitalReadPin(DigitalPin.P12);
@@ -384,7 +384,7 @@ namespace K_Bit {
      */
     //% block="line Tracking"
     //% group="Sensor" weight=68
-    export function LineTracking(): number {
+    export function lineTracking(): number {
         let val = pins.digitalReadPin(DigitalPin.P12) << 0 | pins.digitalReadPin(DigitalPin.P13) << 1;
         return val;
     }
@@ -566,7 +566,7 @@ namespace irRemote {
     //% button.fieldOptions.tooltips="false"
     //% block="IR button %button"
     //% weight=98
-    export function irButton(button: IrButton): number {
+    export function irButton(button: IRBUTTON): number {
         return button as number;
     }
     /**
