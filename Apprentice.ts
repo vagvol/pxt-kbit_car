@@ -182,9 +182,9 @@ namespace kBit {
                 break;
             case 3:  //turn right
                 setPwm(1, 0, speed_value);  //control speed : 0---4095
-                setPwm(0, 0, 500);
+                setPwm(0, 0, 0);
                 setPwm(3, 0, speed_value);  //control speed : 0---4095
-                setPwm(2, 0, 0);
+                setPwm(2, 0, 4095);
                 break;
             default: break;
         }
