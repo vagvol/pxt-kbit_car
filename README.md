@@ -5,18 +5,35 @@ The product page for the Apprentice Car can be found at [https://resoluteshop.co
 
 # Blocks usage:
 
-* Movement
+* Moving the car.  
+The movement of the car is handled using the 'run' block which can make the car move forwards, backwards, left and right.   
+And the car can then be stopped with the car stop block
+
 ```blocks
-K_Bit.run(DIR.RunForward, 0)
+kBit.run(DIR.RunForward, 50)
 basic.pause(500)
-K_Bit.carStop()
+kBit.run(DIR.RunBackward, 50)
 basic.pause(500)
-K_Bit.Motor(MotorObs.LeftSide, MotorDir.Forward)
+kBit.run(DIR.TurnRight, 50)
 basic.pause(500)
-K_Bit.MotorSta(MotorObs.LeftSide)
+kBit.run(DIR.TurnLeft, 50)
+basic.pause(500)
+kBit.carStop()
 ```
 
-* IR
+* Moving the motors.  
+If you wish to control individual motors, this can be done by using the motor blocks.   
+this is done by choosing which motor you wish to contorl, the direction and power
+
+```blocks
+kBit.motor(MotorObs.LeftSide, MotorDir.Forward, 50)
+kBit.motor(MotorObs.RightSide, MotorDir.Forward, 50)
+```
+
+* IR.  
+The IR remote can be used using the irRemote blocks,
+and comparing which button was pressed with the stored list of buttons in the corresponding block.
+
 ```blocks
 irRemote.connectInfrared(DigitalPin.P0)
 basic.forever(function () {
@@ -28,7 +45,9 @@ basic.forever(function () {
 })
 ```
 
-* Neopixel ring
+* Neopixel ring.  
+The neopixel ring should be inserted into pin 5, and can show basic colors as follows:
+
 ```blocks
 let strip = neopixel.create(DigitalPin.P5, 18, NeoPixelMode.RGB)
 basic.forever(function () {
@@ -36,19 +55,23 @@ basic.forever(function () {
 })
 ```
 
-* Ultrasonic sensor
+* Ultrasonic sensor.  
+The Ultrasonic block will return the distance it measures in cm, and this can be compared as follows:
 ```blocks
-if (K_Bit.ultra() > 5) {
+if (kBit.ultra() > 5) {
         basic.showIcon(IconNames.Angry)
     } else {
         basic.showIcon(IconNames.Happy)
 }
 ```
 
-* LED blocks (The brightness block is required)
+* LED blocks.  
+In order to change the color of the two LED's at the front of the apprentice robot,
+it is required you set the LED brightness and then the color, as shown below:
+
 ```blocks
-K_Bit.LED_brightness(0)
-K_Bit.Led(COLOR.red)
+kBit.LED_brightness(0)
+kBit.Led(COLOR.red)
 ```
 
 ## License
@@ -63,5 +86,5 @@ MIT
 More info can be found [here](https://resolute.education/curriculum/5/overview/)
 
 ```package
-apprentice_car=github:resolute-support/pxt-apprentice_Car
+apprentice car=github:resolute-support/pxt-apprentice_Car
 ```
