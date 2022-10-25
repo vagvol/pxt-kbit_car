@@ -335,8 +335,7 @@ namespace kBit {
 
     /////////////////////////////////////////////////////
     
-    pins.setPull(DigitalPin.P2, PinPullMode.PullNone);
-    pins.setPull(DigitalPin.P11, PinPullMode.PullNone);
+    
     /**
      * infrared obstacle sensor
      */
@@ -345,9 +344,11 @@ namespace kBit {
     export function obstacle(LR: MotorObs): number {
         let val;
         if (LR == 0) {  //left side
+            pins.setPull(DigitalPin.P2, PinPullMode.PullNone);  //leftside
             val = pins.digitalReadPin(DigitalPin.P2);
         }
         if (LR == 1) {  //right side
+            pins.setPull(DigitalPin.P11, PinPullMode.PullNone); //rightside
             val = pins.digitalReadPin(DigitalPin.P11);
         }
         return val;
@@ -363,28 +364,29 @@ namespace kBit {
     export function lineSensor(LR: MotorObs): number {
         let val;
         if (LR == 1) {  //left side
+            pins.setPull(DigitalPin.P12, PinPullMode.PullNone);
             val = pins.digitalReadPin(DigitalPin.P12);
         }
         if (LR == 0) {  //right side
+            pins.setPull(DigitalPin.P13, PinPullMode.PullNone);
             val = pins.digitalReadPin(DigitalPin.P13);
         }
         return val;
         
     }
 
-    /**
-     * return 0b01 or 0b10
-     * 0b01 is the sensor on the left
-     * 0b10 is the sensor on the right
-     */
-    pins.setPull(DigitalPin.P12, PinPullMode.PullNone);
-    pins.setPull(DigitalPin.P13, PinPullMode.PullNone);
+    
     /**
      * Line following direction block
+     * return 0b01 or 0b10
+     * 0b01 (P12) is the sensor on the left
+     * 0b10 (P13) is the sensor on the right
      */
     //% block="line Tracking"
     //% group="Sensor" weight=68
     export function lineTracking(): number {
+        pins.setPull(DigitalPin.P12, PinPullMode.PullNone);
+        pins.setPull(DigitalPin.P13, PinPullMode.PullNone);
         let val = pins.digitalReadPin(DigitalPin.P12) << 0 | pins.digitalReadPin(DigitalPin.P13) << 1;
         return val;
     }
@@ -393,7 +395,6 @@ namespace kBit {
      */
     const TRIG_PIN = DigitalPin.P14;
     const ECHO_PIN = DigitalPin.P15;
-    pins.setPull(TRIG_PIN, PinPullMode.PullNone);
     let lastTime = 0;
     /**
      * Ultrasonic Sensor to measure distance
@@ -401,6 +402,7 @@ namespace kBit {
     //% block="ultrasonic"
     //% group="Sensor" weight=67
     export function ultra(): number {
+        pins.setPull(TRIG_PIN, PinPullMode.PullNone);
         //send trig pulse
         pins.digitalWritePin(TRIG_PIN, 0)
         control.waitMicros(2);
