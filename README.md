@@ -86,5 +86,5 @@ MIT
 More info can be found [here](https://resolute.education/curriculum/5/overview/)
 
 ```package
-apprentice car=github:resolute-support/pxt-apprentice_Car
+apprentice_car=github:resolute-support/pxt-apprentice_Car
 ```
