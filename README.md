@@ -70,8 +70,8 @@ In order to change the color of the two LED's at the front of the apprentice rob
 it is required you set the LED brightness and then the color, as shown below:
 
 ```blocks
-kBit.LED_brightness(0)
-kBit.Led(COLOR.red)
+kBit.ledBrightness(100)
+kBit.led(COLOR.Red)
 ```
 
 ## License
