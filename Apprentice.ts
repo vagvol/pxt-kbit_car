@@ -244,7 +244,7 @@ namespace kBit {
      * stop individual motors
      * @param M which motor to stop
      */
-    //% block="contorl $M motor"
+    //% block="stop $M motor"
     //% group="Motor" weight=96
     export function motorMove(M: KBitMotorObs) {
         if (!PCA9685_Initialized) {
