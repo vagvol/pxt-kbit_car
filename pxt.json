@@ -1,6 +1,5 @@
 {
     "name": "apprentice_car",
-    "version": "1.1.3",
     "description": "Makecode Extension for the Apprentice Car made by Resolute",
     "license": "MIT",
     "dependencies": {
