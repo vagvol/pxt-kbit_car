@@ -37,7 +37,7 @@ and comparing which button was pressed with the stored list of buttons in the co
 ```blocks
 irRemote.connectInfrared(DigitalPin.P0)
 basic.forever(function () {
-    if (irRemote.returnIrButton() == irRemote.irButton(KBitIrButtons.Ok) {
+    if (irRemote.returnIrButton() == irRemote.irButton(KBitIrButtons.Ok)) {
         basic.showString("OK")
         basic.pause(100)
         basic.clearScreen()
