@@ -1,6 +1,6 @@
 /**
-     * used for motor and infrared obstacle sensor
-     */
+* used for motor and infrared obstacle sensor
+*/
 const enum KBitMotorObs {
     LeftSide = 0,
     RightSide = 1
@@ -27,6 +27,51 @@ const enum KBitDir {
     RunBack = 1,
     TurnLeft = 2,
     TurnRight = 3
+}
+
+const enum KBitIrButtons {
+    //% block=" "
+    Any = -1,
+    //% block="▲"
+    Up = 70,
+    //% block=" "
+    Unused_2 = -2,
+    //% block="◀"
+    Left = 68,
+    //% block="OK"
+    Ok = 64,
+    //% block="▶"
+    Right = 67,
+    //% block=" "
+    Unused_3 = -3,
+    //% block="▼"
+    Down = 21,
+    //% block=" "
+    Unused_4 = -4,
+    //% block="1"
+    Number_1 = 22,
+    //% block="2"
+    Number_2 = 25,
+    //% block="3"
+    Number_3 = 13,
+    //% block="4"
+    Number_4 = 12,
+    //% block="5"
+    Number_5 = 24,
+    //% block="6"
+    Number_6 = 94,
+    //% block="7"
+    Number_7 = 8,
+    //% block="8"
+    Number_8 = 28,
+    //% block="9"
+    Number_9 = 90,
+    //% block="*"
+    Star = 66,
+    //% block="0"
+    Number_0 = 82,
+    //% block="#"
+    Hash = 74
 }
 
 //% color="#ff6800" icon="\uf1b9" weight=15
@@ -341,7 +386,6 @@ namespace kBit {
             val = pins.digitalReadPin(DigitalPin.P13);
         }
         return val;
-        
     }
 
     
@@ -410,50 +454,6 @@ namespace irRemote {
     /**
      * used for IR remote
      */
-    const enum IrButton {
-        //% block=" "
-        Any = -1,
-        //% block="▲"
-        Up = 70,
-        //% block=" "
-        Unused_2 = -2,
-        //% block="◀"
-        Left = 68,
-        //% block="OK"
-        Ok = 64,
-        //% block="▶"
-        Right = 67,
-        //% block=" "
-        Unused_3 = -3,
-        //% block="▼"
-        Down = 21,
-        //% block=" "
-        Unused_4 = -4,
-        //% block="1"
-        Number_1 = 22,
-        //% block="2"
-        Number_2 = 25,
-        //% block="3"
-        Number_3 = 13,
-        //% block="4"
-        Number_4 = 12,
-        //% block="5"
-        Number_5 = 24,
-        //% block="6"
-        Number_6 = 94,
-        //% block="7"
-        Number_7 = 8,
-        //% block="8"
-        Number_8 = 28,
-        //% block="9"
-        Number_9 = 90,
-        //% block="*"
-        Star = 66,
-        //% block="0"
-        Number_0 = 82,
-        //% block="#"
-        Hash = 74
-    }
     /**
      * define a IR receiver class
      */
@@ -586,7 +586,7 @@ namespace irRemote {
     //% button.fieldOptions.tooltips="false"
     //% block="IR button %button"
     //% weight=98
-    export function irButton(button: IrButton): number {
+    export function irButton(button: KBitIrButtons): number {
         return button as number;
     }
     /**

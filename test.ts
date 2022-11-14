@@ -24,6 +24,10 @@ function testNeopixel() {
     strip.clear()
 }
 
+if (irRemote.returnIrButton() == irRemote.irButton(KBitIrButtons.Ok)) {
+    
+}
+
 function followLine() {
     let tracking_values = kBit.lineTracking()
     if (tracking_values == 1) {
