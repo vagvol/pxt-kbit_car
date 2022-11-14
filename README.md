@@ -10,13 +10,13 @@ The movement of the car is handled using the 'run' block which can make the car 
 And the car can then be stopped with the car stop block
 
 ```blocks
-kBit.run(DIR.RunForward, 50)
+kBit.run(KBitDir.RunForward, 50)
 basic.pause(500)
-kBit.run(DIR.RunBackward, 50)
+kBit.run(KBitDir.RunBackward, 50)
 basic.pause(500)
-kBit.run(DIR.TurnRight, 50)
+kBit.run(KBitDir.TurnRight, 50)
 basic.pause(500)
-kBit.run(DIR.TurnLeft, 50)
+kBit.run(KBitDir.TurnLeft, 50)
 basic.pause(500)
 kBit.carStop()
 ```
@@ -26,8 +26,8 @@ If you wish to control individual motors, this can be done by using the motor bl
 this is done by choosing which motor you wish to control, the direction and power.
 
 ```blocks
-kBit.motor(MotorObs.LeftSide, MotorDir.Forward, 50)
-kBit.motor(MotorObs.RightSide, MotorDir.Forward, 50)
+kBit.motor(KBitMotorObs.LeftSide, KBitMotorDir.Forward, 50)
+kBit.motor(KBitMotorObs.RightSide, KBitMotorDir.Forward, 50)
 ```
 
 * IR.  
@@ -37,7 +37,7 @@ and comparing which button was pressed with the stored list of buttons in the co
 ```blocks
 irRemote.connectInfrared(DigitalPin.P0)
 basic.forever(function () {
-    if (irRemote.returnIrButton() == irRemote.irButton(IrButton.Ok)) {
+    if (irRemote.returnIrButton() == irRemote.IrButton(IrButton.Ok)) {
         basic.showString("OK")
         basic.pause(100)
         basic.clearScreen()
@@ -71,7 +71,7 @@ it is required you set the LED brightness and then the color, as shown below:
 
 ```blocks
 kBit.ledBrightness(100)
-kBit.led(COLOR.Red)
+kBit.led(KBitColor.Red)
 ```
 
 ## License
