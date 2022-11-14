@@ -23,7 +23,7 @@ kBit.carStop()
 
 * Moving the motors.  
 If you wish to control individual motors, this can be done by using the motor blocks.   
-this is done by choosing which motor you wish to contorl, the direction and power
+this is done by choosing which motor you wish to control, the direction and power.
 
 ```blocks
 kBit.motor(MotorObs.LeftSide, MotorDir.Forward, 50)
@@ -75,11 +75,9 @@ kBit.led(COLOR.Red)
 ```
 
 ## License
-
 MIT
 
 ## Supported targets
-
 * for PXT/microbit
 
 ## Further resources

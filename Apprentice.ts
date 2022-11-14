@@ -1,7 +1,18 @@
 /**
- * used for RGB-LED
- */
-enum COLOR {
+     * used for motor and infrared obstacle sensor
+     */
+const enum KBitMotorObs {
+    LeftSide = 0,
+    RightSide = 1
+}
+const enum KBitMotorDir {
+    Forward = 0,
+    Back = 1
+}
+/**
+* used for RGB-LED
+*/
+const enum KBitColor {
     Red,
     Green,
     Blue,
@@ -11,70 +22,13 @@ enum COLOR {
 /**
  * used for control motor
  */
-enum DIR {
+const enum KBitDir {
     RunForward = 0,
     RunBack = 1,
     TurnLeft = 2,
     TurnRight = 3
 }
-/**
- * used for IR remote
- */
-const enum IRBUTTON {
-    //% block=" "
-    Any = -1,
-    //% block="▲"
-    Up = 70,
-    //% block=" "
-    Unused_2 = -2,
-    //% block="◀"
-    Left = 68,
-    //% block="OK"
-    Ok = 64,
-    //% block="▶"
-    Right = 67,
-    //% block=" "
-    Unused_3 = -3,
-    //% block="▼"
-    Down = 21,
-    //% block=" "
-    Unused_4 = -4,
-    //% block="1"
-    Number_1 = 22,
-    //% block="2"
-    Number_2 = 25,
-    //% block="3"
-    Number_3 = 13,
-    //% block="4"
-    Number_4 = 12,
-    //% block="5"
-    Number_5 = 24,
-    //% block="6"
-    Number_6 = 94,
-    //% block="7"
-    Number_7 = 8,
-    //% block="8"
-    Number_8 = 28,
-    //% block="9"
-    Number_9 = 90,
-    //% block="*"
-    Star = 66,
-    //% block="0"
-    Number_0 = 82,
-    //% block="#"
-    Hash = 74
-}
-/**
- * used for motor and infrared obstacle sensor
- */
-enum MotorObs {
-    LeftSide = 0,
-    RightSide = 1
-}
-enum MotorDir {
-    Forward = 0,
-    Back = 1
-}
+
 //% color="#ff6800" icon="\uf1b9" weight=15
 //% groups="['Motor', 'RGB-led', 'Neo-pixel', 'Sensor', 'Tone']"
 namespace kBit {
@@ -150,13 +104,14 @@ namespace kBit {
 
     /////////////////////////////////////////////////////
     /**
-     * move the car in a desired direction
+     * move the car left, right, forward or backwards
+     * @param direction type of movement to make
+     * @param speed how fast to make movement
      */
     //% block="car $direction speed: $speed \\%"
     //% speed.min=0 speed.max=100
     //% group="Motor" weight=99
-
-    export function run(direction: DIR, speed: number) {
+    export function run(direction: KBitDir, speed: number) {
         if (!PCA9685_Initialized) {
             initPCA9685();
         }
@@ -189,6 +144,8 @@ namespace kBit {
             default: break;
         }
     }
+
+
     /**
      * stop the car from moving
      */
@@ -201,13 +158,18 @@ namespace kBit {
         setPwm(1, 0, 0);  //control speed : 0---4095
         setPwm(3, 0, 0);  //control speed : 0---4095
     }
+
+
     /**
      * set speed of motors on the car
+     * @param M which motor to use
+     * @param MD direction to move motor
+     * @param speed speed to move motor
      */
     //% block="$M motor run $MD speed: $speed \\%"
     //% speed.min=0 speed.max=100
     //% group="Motor" weight=97
-    export function motor(M: MotorObs, MD: MotorDir, speed: number) {
+    export function motor(M: KBitMotorObs, MD: KBitMotorDir, speed: number) {
         if (!PCA9685_Initialized) {
             initPCA9685();
         }
@@ -231,12 +193,15 @@ namespace kBit {
         }
 
     }
+
+
     /**
-     * control individual motors
+     * stop individual motors
+     * @param M which motor to stop
      */
-    //% block="$M motor stop"
+    //% block="contorl $M motor"
     //% group="Motor" weight=96
-    export function motorMove(M: MotorObs) {
+    export function motorMove(M: KBitMotorObs) {
         if (!PCA9685_Initialized) {
             initPCA9685();
         }
@@ -250,6 +215,7 @@ namespace kBit {
             setPwm(2, 0, 0);
         }
     }
+
     /////////////////////////////////////////////////////
     /**
      * set rgb-led brightness
@@ -266,34 +232,35 @@ namespace kBit {
     }
     /**
      * set the rgb-led color via the color card
+     * @param col color to make LED lights
      */
     //% block="set RGBled $col"
     //% group="RGB-led" weight=78
-    export function led(col: COLOR) {
+    export function led(col: KBitColor) {
         if (!PCA9685_Initialized) {
             initPCA9685();
         }
-        if (col == COLOR.Red) {
+        if (col == KBitColor.Red) {
             setPwm(5, 0, 4095);
             setPwm(6, 0, lBrightness);
             setPwm(4, 0, 4095);
         }
-        if (col == COLOR.Green) {
+        if (col == KBitColor.Green) {
             setPwm(5, 0, lBrightness);
             setPwm(6, 0, 4095);
             setPwm(4, 0, 4095);
         }
-        if (col == COLOR.Blue) {
+        if (col == KBitColor.Blue) {
             setPwm(5, 0, 4095);
             setPwm(6, 0, 4095);
             setPwm(4, 0, lBrightness);
         }
-        if (col == COLOR.White) {
+        if (col == KBitColor.White) {
             setPwm(5, 0, lBrightness);
             setPwm(6, 0, lBrightness);
             setPwm(4, 0, lBrightness);
         }
-        if (col == COLOR.Black) {
+        if (col == KBitColor.Black) {
             setPwm(5, 0, 4095);
             setPwm(6, 0, 4095);
             setPwm(4, 0, 4095);
@@ -338,10 +305,11 @@ namespace kBit {
     
     /**
      * infrared obstacle sensor
+     * @param LR which infared sensor to use
      */
     //% block="$LR obstacle sensor "
     //% group="Sensor" weight=69
-    export function obstacle(LR: MotorObs): number {
+    export function obstacle(LR: KBitMotorObs): number {
         let val;
         if (LR == 0) {  //left side
             pins.setPull(DigitalPin.P2, PinPullMode.PullNone);  //leftside
@@ -358,10 +326,11 @@ namespace kBit {
 
     /**
      * individual infared line sensors
+     * @param LR which infared sensor to use
      */
     //% block="$LR line sensor "
     //% group="Sensor" weight=69
-    export function lineSensor(LR: MotorObs): number {
+    export function lineSensor(LR: KBitMotorObs): number {
         let val;
         if (LR == 1) {  //left side
             pins.setPull(DigitalPin.P12, PinPullMode.PullNone);
@@ -377,12 +346,12 @@ namespace kBit {
 
     
     /**
-     * Line following direction block
-     * return 0b01 or 0b10
-     * 0b01 (P12) is the sensor on the left
-     * 0b10 (P13) is the sensor on the right
+     * Line following block, returns value needed of needed direction
+     * 3: move forward
+     * 2: turn left
+     * 1: turn right
      */
-    //% block="line Tracking"
+    //% block="line tracking"
     //% group="Sensor" weight=68
     export function lineTracking(): number {
         pins.setPull(DigitalPin.P12, PinPullMode.PullNone);
@@ -426,7 +395,7 @@ namespace kBit {
         return Math.round(ret / 40);
     }
     /**
-     * photoresistance sensor to measure light
+     * photoresistance sensor to measure ambient light
      */
     //% block="photoresistor "
     //% group="Sensor" weight=66
@@ -438,6 +407,53 @@ namespace kBit {
 
 //% color="#ff6800" weight=10 icon="\uf1eb"
 namespace irRemote {
+    /**
+     * used for IR remote
+     */
+    const enum IrButton {
+        //% block=" "
+        Any = -1,
+        //% block="▲"
+        Up = 70,
+        //% block=" "
+        Unused_2 = -2,
+        //% block="◀"
+        Left = 68,
+        //% block="OK"
+        Ok = 64,
+        //% block="▶"
+        Right = 67,
+        //% block=" "
+        Unused_3 = -3,
+        //% block="▼"
+        Down = 21,
+        //% block=" "
+        Unused_4 = -4,
+        //% block="1"
+        Number_1 = 22,
+        //% block="2"
+        Number_2 = 25,
+        //% block="3"
+        Number_3 = 13,
+        //% block="4"
+        Number_4 = 12,
+        //% block="5"
+        Number_5 = 24,
+        //% block="6"
+        Number_6 = 94,
+        //% block="7"
+        Number_7 = 8,
+        //% block="8"
+        Number_8 = 28,
+        //% block="9"
+        Number_9 = 90,
+        //% block="*"
+        Star = 66,
+        //% block="0"
+        Number_0 = 82,
+        //% block="#"
+        Hash = 74
+    }
     /**
      * define a IR receiver class
      */
@@ -547,6 +563,7 @@ namespace irRemote {
     }
     /**
      * Connects to the IR receiver module at the specified pin.
+     * @param IR_pin pin which to connect to the car
      */
     //% blockId="infrared_connect"
     //% block="connect IR receiver at %IR_pin"
@@ -561,6 +578,7 @@ namespace irRemote {
     }
     /**
      * Returns the command code of a specific IR button.
+     * @param button selected button user wishes to compare value for
      */
     //% blockId=infrared_button
     //% button.fieldEditor="gridpicker"
@@ -568,19 +586,18 @@ namespace irRemote {
     //% button.fieldOptions.tooltips="false"
     //% block="IR button %button"
     //% weight=98
-    export function irButton(button: IRBUTTON): number {
+    export function irButton(button: IrButton): number {
         return button as number;
     }
     /**
      * Returns the code of the IR button that is currently pressed and 0 if no button is pressed.
-     * It is recommended to delay 110ms to read the data once
      */
     //% blockId=infrared_pressed_button
     //% block="IR button"
     //% weight=97
     export function returnIrButton(): number {
         irDataProcessing();
-        basic.pause(80);      //Delay by one infrared receiving period
+        basic.pause(110);      //Delay by one infrared receiving period
         return IR_R.command;
     }
 }

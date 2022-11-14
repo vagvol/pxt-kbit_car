@@ -27,30 +27,30 @@ function testNeopixel() {
 function followLine() {
     let tracking_values = kBit.lineTracking()
     if (tracking_values == 1) {
-        kBit.run(DIR.TurnRight, 40)
+        kBit.run(KBitDir.TurnRight, 40)
     } else if (tracking_values == 2) {
-        kBit.run(DIR.TurnLeft, 40)
+        kBit.run(KBitDir.TurnLeft, 40)
     } else if (tracking_values == 3) {
-        kBit.run(DIR.RunForward, 30)
+        kBit.run(KBitDir.RunForward, 30)
     } else {
         basic.clearScreen()
     }
 }
 
 function testMovement() {
-    kBit.run(DIR.RunForward, 40)
+    kBit.run(KBitDir.RunForward, 40)
     basic.pause(1000)
     kBit.carStop()
     basic.pause(500)
-    kBit.run(DIR.RunBack, 40)
+    kBit.run(KBitDir.RunBack, 40)
     basic.pause(1000)
     kBit.carStop()
     basic.pause(500)
-    kBit.run(DIR.TurnLeft, 40)
+    kBit.run(KBitDir.TurnLeft, 40)
     basic.pause(1000)
     kBit.carStop()
     basic.pause(500)
-    kBit.run(DIR.TurnRight, 40)
+    kBit.run(KBitDir.TurnRight, 40)
     basic.pause(1000)
     kBit.carStop()
     basic.pause(500)
