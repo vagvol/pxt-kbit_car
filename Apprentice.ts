@@ -211,28 +211,28 @@ namespace kBit {
      * @param MD direction to move motor
      * @param speed speed to move motor
      */
-    //% block="$M motor run $MD speed: $speed \\%"
+    //% block="$m motor run $md speed: $speed \\%"
     //% speed.min=0 speed.max=100
     //% group="Motor" weight=97
-    export function motor(M: KBitMotorObs, MD: KBitMotorDir, speed: number) {
+    export function motor(m: KBitMotorObs, md: KBitMotorDir, speed: number) {
         if (!PCA9685_Initialized) {
             initPCA9685();
         }
         let speed_value = Math.map(speed, 0, 100, 0, 4095);
-        if (M == 0 && MD == 0) {
+        if (m == 0 && md == 0) {
             setPwm(1, 0, speed_value);  //control speed : 0---4095
             setPwm(0, 0, 0);
         }
-        if (M == 0 && MD == 1) {
+        if (m == 0 && md == 1) {
             setPwm(1, 0, speed_value);  //control speed : 0---4095
             setPwm(0, 0, 4095);
         }
 
-        if (M == 1 && MD == 0) {
+        if (m == 1 && md == 0) {
             setPwm(3, 0, speed_value);  //control speed : 0---4095
             setPwm(2, 0, 0);
         }
-        if (M == 1 && MD == 1) {
+        if (m == 1 && md == 1) {
             setPwm(3, 0, speed_value);  //control speed : 0---4095
             setPwm(2, 0, 4095);
         }
@@ -244,7 +244,7 @@ namespace kBit {
      * stop individual motors
      * @param M which motor to stop
      */
-    //% block="stop $M motor"
+    //% block="stop $m motor"
     //% group="Motor" weight=96
     export function motorStop(m: KBitMotorObs) {
         if (!PCA9685_Initialized) {
@@ -352,7 +352,7 @@ namespace kBit {
      * infrared obstacle sensor
      * @param LR which infared sensor to use
      */
-    //% block="$LR obstacle sensor "
+    //% block="$lr obstacle sensor "
     //% group="Sensor" weight=69
     export function obstacle(lr: KBitMotorObs): number {
         let val;
@@ -373,7 +373,7 @@ namespace kBit {
      * individual infared line sensors
      * @param LR which infared sensor to use
      */
-    //% block="$LR line sensor "
+    //% block="$lr line sensor "
     //% group="Sensor" weight=69
     export function lineSensor(lr: KBitMotorObs): number {
         let val;
@@ -566,7 +566,7 @@ namespace irRemote {
      * @param IR_pin pin which to connect to the car
      */
     //% blockId="infrared_connect"
-    //% block="connect IR receiver at %IR_pin"
+    //% block="connect IR receiver at %ir_pin"
     //% IR_pin.fieldEditor="gridpicker"
     //% IR_pin.fieldOptions.columns=4
     //% IR_pin.fieldOptions.tooltips="false"
