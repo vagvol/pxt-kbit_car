@@ -11,8 +11,7 @@
     },
     "files": [
         "README.md",
-        "Apprentice.ts",
-        "tutorial-info-cache.json"
+        "Apprentice.ts"
     ],
     "testFiles": [
         "test.ts"

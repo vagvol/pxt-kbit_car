@@ -105,11 +105,11 @@ namespace kBit {
         return val;
     }
 
-    function i2cWrite(PCA9685_ADDRESS: number, reg: number, value: number) {
+    function i2cWrite(addr: number, reg: number, value: number) {
         let buf = pins.createBuffer(2)
         buf[0] = reg
         buf[1] = value
-        pins.i2cWriteBuffer(PCA9685_ADDRESS, buf)
+        pins.i2cWriteBuffer(addr, buf)
     }
 
     function setFreq(freq: number): void {
@@ -246,16 +246,16 @@ namespace kBit {
      */
     //% block="stop $M motor"
     //% group="Motor" weight=96
-    export function motorMove(M: KBitMotorObs) {
+    export function motorStop(m: KBitMotorObs) {
         if (!PCA9685_Initialized) {
             initPCA9685();
         }
 
-        if (M == 0) {         //left side motor
+        if (m == 0) {         //left side motor
             setPwm(1, 0, 0);  //control speed : 0---4095
             setPwm(0, 0, 0);
         }
-        if (M == 1) {         //right side motor
+        if (m == 1) {         //right side motor
             setPwm(3, 0, 0);  //control speed : 0---4095
             setPwm(2, 0, 0);
         }
@@ -346,21 +346,21 @@ namespace kBit {
     }
 
     /////////////////////////////////////////////////////
-    
-    
+
+
     /**
      * infrared obstacle sensor
      * @param LR which infared sensor to use
      */
     //% block="$LR obstacle sensor "
     //% group="Sensor" weight=69
-    export function obstacle(LR: KBitMotorObs): number {
+    export function obstacle(lr: KBitMotorObs): number {
         let val;
-        if (LR == 0) {  //left side
+        if (lr == 0) {  //left side
             pins.setPull(DigitalPin.P2, PinPullMode.PullNone);  //leftside
             val = pins.digitalReadPin(DigitalPin.P2);
         }
-        if (LR == 1) {  //right side
+        if (lr == 1) {  //right side
             pins.setPull(DigitalPin.P11, PinPullMode.PullNone); //rightside
             val = pins.digitalReadPin(DigitalPin.P11);
         }
@@ -375,20 +375,20 @@ namespace kBit {
      */
     //% block="$LR line sensor "
     //% group="Sensor" weight=69
-    export function lineSensor(LR: KBitMotorObs): number {
+    export function lineSensor(lr: KBitMotorObs): number {
         let val;
-        if (LR == 1) {  //left side
+        if (lr == 1) {  //left side
             pins.setPull(DigitalPin.P12, PinPullMode.PullNone);
             val = pins.digitalReadPin(DigitalPin.P12);
         }
-        if (LR == 0) {  //right side
+        if (lr == 0) {  //right side
             pins.setPull(DigitalPin.P13, PinPullMode.PullNone);
             val = pins.digitalReadPin(DigitalPin.P13);
         }
         return val;
     }
 
-    
+
     /**
      * Line following block, returns value needed of needed direction
      * 3: move forward
@@ -424,7 +424,7 @@ namespace kBit {
         pins.digitalWritePin(TRIG_PIN, 0)
 
         // read echo pulse  max distance : 6m(35000us)
-        //2020-7-6 
+        //2020-7-6
         // pins.pulseIn():This function has a bug and returns data with large errors.
         let t = pins.pulseIn(ECHO_PIN, PulseValue.High, 35000);
         let ret = t;
@@ -490,8 +490,8 @@ namespace irRemote {
     /**
      * initialize the IR receiver function
      */
-    function irInit(IR_pin: DigitalPin) {
-        pins.onPulsed(IR_pin, PulseValue.Low, () => {      //interrupt event
+    function irInit(ir_pin: DigitalPin) {
+        pins.onPulsed(ir_pin, PulseValue.Low, () => {      //interrupt event
             LpulseTime = pins.pulseDuration();             //measure the pulse
             if (6750 < LpulseTime && LpulseTime < 11250) { //9ms
                 LpulseCounter = 0;
@@ -501,7 +501,7 @@ namespace irRemote {
                 LpulseCounter += 1;
             }
         });
-        pins.onPulsed(IR_pin, PulseValue.High, () => {
+        pins.onPulsed(ir_pin, PulseValue.High, () => {
             HpulseTime = pins.pulseDuration();
             /*if (1687 < HpulseTime && HpulseTime < 2812) {  //2.25ms
                 repeatedPulse = true;
@@ -571,8 +571,8 @@ namespace irRemote {
     //% IR_pin.fieldOptions.columns=4
     //% IR_pin.fieldOptions.tooltips="false"
     //% weight=99
-    export function connectInfrared(IR_pin: DigitalPin): void {
-        IR_R.IR_pin = IR_pin;   //define IR receiver control pin
+    export function connectInfrared(ir_pin: DigitalPin): void {
+        IR_R.IR_pin = ir_pin;   //define IR receiver control pin
         pins.setPull(IR_R.IR_pin, PinPullMode.PullUp);
         irInit(IR_R.IR_pin);   //initialize the IR receiver
     }
