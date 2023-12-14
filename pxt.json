@@ -1,6 +1,6 @@
 {
-    "name": "apprentice_car",
-    "version": "1.1.7",
+    "name": "kbit_car",
+    "version": "1.0.0",
     "description": "Makecode Extension for the Apprentice Car made by Resolute",
     "license": "MIT",
     "dependencies": {
@@ -18,7 +18,7 @@
     ],
     "public": true,
     "targetVersions": {
-        "target": "5.0.12",
+        "target": "6.0.25",
         "targetId": "microbit"
     },
     "supportedTargets": [
